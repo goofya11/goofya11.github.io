@@ -2,10 +2,10 @@
 
 **Including:**
 
-**Text to image**__
+Text to image
 
-**Text to Video **__
+Text to Video 
 
-**Coding Tools **__
+Coding Tools 
 
-**Development Tools**__
+Development Tools
