@@ -6,10 +6,6 @@
     <meta name="description" content="Discover 100+ free AI tools for your creative and professional needs">
     <meta name="theme-color" content="#6366f1">
     <title>100+ Free AI Tools Collection</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="favicon.png">
-
     <style>
         /* Critical CSS */
         :root {
@@ -35,6 +31,12 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Fix for white flash */
+        html {
+            background: var(--background);
+            height: 100%;
+        }
+
         /* Optimized Body */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -48,6 +50,10 @@
             position: relative;
             overflow-x: hidden;
             text-rendering: optimizeLegibility;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Optimized Container */
@@ -59,6 +65,10 @@
             z-index: 1;
             min-height: 100vh;
             contain: layout style paint;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Optimized Header */
@@ -67,6 +77,10 @@
             margin-bottom: 3rem;
             padding: 2rem 0;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         header h1 {
@@ -79,6 +93,10 @@
             letter-spacing: -0.025em;
             text-shadow: var(--glow);
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         header .subtitle {
@@ -87,6 +105,10 @@
             max-width: 600px;
             margin: 0 auto;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Optimized Grid Layout */
@@ -99,6 +121,9 @@
             will-change: transform;
             opacity: 0;
             animation: fadeIn 0.5s ease forwards;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
         }
 
         @keyframes fadeIn {
@@ -120,6 +145,8 @@
             will-change: transform;
             contain: content;
             backface-visibility: hidden;
+            transform: translateZ(0);
+            perspective: 1000;
         }
 
         .tool-card:hover {
@@ -133,6 +160,10 @@
             margin-bottom: 0.75rem;
             font-size: 1.25rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .tool-card p {
@@ -140,6 +171,10 @@
             font-size: 0.875rem;
             margin-bottom: 1rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Optimized Search */
@@ -147,6 +182,10 @@
             max-width: 600px;
             margin: 2rem auto;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .search-container input {
@@ -159,6 +198,10 @@
             font-size: 1.1rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .search-container input:focus {
@@ -179,6 +222,10 @@
             margin: 20px;
             backdrop-filter: blur(10px);
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .category-btn {
@@ -192,6 +239,10 @@
             font-size: 0.9rem;
             white-space: nowrap;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .category-btn:hover {
@@ -210,6 +261,10 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .tag {
@@ -220,6 +275,10 @@
             font-size: 0.75rem;
             font-weight: 500;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Loading State */
@@ -230,6 +289,10 @@
             border-radius: 1rem;
             margin-top: 2rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .loading-text {
@@ -238,11 +301,19 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .loading-subtext {
             color: var(--text-secondary);
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Footer */
@@ -252,6 +323,10 @@
             margin-top: 3rem;
             color: var(--text-secondary);
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         .creator-name {
@@ -259,6 +334,10 @@
             font-weight: 600;
             margin-top: 0.5rem;
             contain: content;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         /* Responsive Design */
@@ -292,6 +371,10 @@
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
             border-radius: 0.5rem;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
         }
 
         @keyframes loading {
