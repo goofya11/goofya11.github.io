@@ -3,53 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover 100+ free AI tools for your creative and professional needs">
+    <meta name="theme-color" content="#6366f1">
     <title>100+ Free AI Tools Collection</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Critical CSS */
+        :root {
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --background: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent: #818cf8;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+            --card-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2);
+            --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Optimized CSS Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Optimized Body */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(45deg, #0f172a, #1e293b, #334155, #1e293b, #0f172a);
+            background-size: 400% 400%;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Optimized Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            contain: layout style paint;
+        }
+
+        /* Optimized Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            contain: content;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+            text-shadow: var(--glow);
+            contain: content;
+        }
+
+        header .subtitle {
+            color: var(--text-secondary);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 600px;
+            margin: 0 auto;
+            contain: content;
+        }
+
+        /* Optimized Grid Layout */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+            gap: 2rem;
+            padding: 1rem;
+            contain: content;
+            will-change: transform;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Optimized Cards */
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            contain: content;
+            backface-visibility: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
+        }
+
+        .tool-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            contain: content;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            contain: content;
+        }
+
+        /* Optimized Search */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            contain: content;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            border: 2px solid var(--border);
+            border-radius: 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            contain: content;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        /* Optimized Categories */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 15px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            contain: content;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            contain: content;
+        }
+
+        .category-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        /* Optimized Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            contain: content;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            contain: content;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 1rem;
+            margin-top: 2rem;
+            contain: content;
+        }
+
+        .loading-text {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            contain: content;
+        }
+
+        .loading-subtext {
+            color: var(--text-secondary);
+            contain: content;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            contain: content;
+        }
+
+        .creator-name {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            contain: content;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body { 
+                padding: 1rem;
+                font-size: 14px;
+            }
+            .tools-grid { 
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .categories { 
+                padding: 15px; 
+                gap: 8px;
+                margin: 10px;
+            }
+            .tool-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(99, 102, 241, 0.1) 25%,
+                rgba(99, 102, 241, 0.2) 50%,
+                rgba(99, 102, 241, 0.1) 75%
+            );
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="favicon.png">
-
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 class="animate-cyberpunk">100+ Free AI Tools Collection</h1>
-            <p class="subtitle animate-float-text">Discover the most powerful AI tools for your creative and professional needs</p>
+            <h1>100+ Free AI Tools Collection</h1>
+            <p class="subtitle">Discover the most powerful AI tools for your creative and professional needs</p>
         </header>
 
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search for AI tools..." class="animate-shimmer">
+            <input type="text" id="searchInput" placeholder="Search for AI tools..." aria-label="Search tools">
         </div>
 
-        <div class="categories">
-            <button class="category-btn active" data-category="all">All Tools</button>
-            <button class="category-btn" data-category="text">Text Generation</button>
-            <button class="category-btn" data-category="image">Image Generation</button>
-            <button class="category-btn" data-category="audio">Audio Tools</button>
-            <button class="category-btn" data-category="video">Video Tools</button>
-            <button class="category-btn" data-category="coding">Coding Tools</button>
-            <button class="category-btn" data-category="productivity">Productivity</button>
-            <button class="category-btn" data-category="research">Research</button>
-            <button class="category-btn" data-category="business">Business</button>
-            <button class="category-btn" data-category="media">Media Resources</button>
-            <button class="category-btn" data-category="design">Design Tools</button>
-            <button class="category-btn" data-category="development">Development</button>
+        <div class="categories" role="tablist">
+            <button class="category-btn active" data-category="all" role="tab" aria-selected="true">All Tools</button>
+            <button class="category-btn" data-category="text" role="tab" aria-selected="false">Text Generation</button>
+            <button class="category-btn" data-category="image" role="tab" aria-selected="false">Image Generation</button>
+            <button class="category-btn" data-category="audio" role="tab" aria-selected="false">Audio Tools</button>
+            <button class="category-btn" data-category="video" role="tab" aria-selected="false">Video Tools</button>
+            <button class="category-btn" data-category="coding" role="tab" aria-selected="false">Coding Tools</button>
+            <button class="category-btn" data-category="productivity" role="tab" aria-selected="false">Productivity</button>
+            <button class="category-btn" data-category="research" role="tab" aria-selected="false">Research</button>
+            <button class="category-btn" data-category="business" role="tab" aria-selected="false">Business</button>
+            <button class="category-btn" data-category="media" role="tab" aria-selected="false">Media Resources</button>
+            <button class="category-btn" data-category="design" role="tab" aria-selected="false">Design Tools</button>
+            <button class="category-btn" data-category="development" role="tab" aria-selected="false">Development</button>
         </div>
 
-        <div class="tools-grid" id="toolsGrid">
+        <div class="tools-grid" id="toolsGrid" role="tabpanel">
             <!-- Tools will be dynamically inserted here -->
         </div>
 
-        <div class="loading">
+        <div class="loading" aria-live="polite">
             <div class="loading-text">More Amazing Tools Coming Soon!</div>
             <div class="loading-subtext">We're constantly adding new AI tools to help you work smarter</div>
-            <div class="loading-dots">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-            </div>
         </div>
 
         <footer class="footer">
@@ -58,6 +341,6 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html> 
