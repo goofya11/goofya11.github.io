@@ -788,39 +788,59 @@ const tools = [
     }
 ];
 
-// DOM Elements
-const toolsGrid = document.getElementById('toolsGrid');
-const searchInput = document.getElementById('searchInput');
-const categoryButtons = document.querySelectorAll('.category-btn');
+// Cache DOM elements
+const elements = {
+    searchInput: document.getElementById('searchInput'),
+    toolsGrid: document.getElementById('toolsGrid'),
+    categoryButtons: document.querySelectorAll('.category-btn')
+};
 
-// Initialize the page
-function initializePage() {
-    console.log('Initializing page...');
-    if (!toolsGrid) {
-        console.error('Tools grid element not found!');
-        return;
+// Create loading skeleton
+const createSkeleton = () => {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'tool-card skeleton';
+    skeleton.innerHTML = `
+        <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 12px;"></div>
+        <div class="skeleton" style="height: 16px; width: 100%; margin-bottom: 8px;"></div>
+        <div class="skeleton" style="height: 16px; width: 90%; margin-bottom: 12px;"></div>
+        <div style="display: flex; gap: 8px;">
+            <div class="skeleton" style="height: 24px; width: 80px;"></div>
+            <div class="skeleton" style="height: 24px; width: 60px;"></div>
+        </div>
+    `;
+    return skeleton;
+};
+
+// Show loading state
+const showLoading = () => {
+    elements.toolsGrid.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        elements.toolsGrid.appendChild(createSkeleton());
     }
-    renderTools(tools);
-    setupEventListeners();
-}
+};
 
-// Render tools in the grid
-function renderTools(toolsToRender) {
-    console.log(`Rendering ${toolsToRender.length} tools...`);
-    toolsGrid.innerHTML = '';
-    toolsToRender.forEach(tool => {
-        const card = createToolCard(tool);
-        toolsGrid.appendChild(card);
-    });
-}
+// Debounce function for search with improved performance
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
 
-// Create a tool card element
-function createToolCard(tool) {
+// Create tool card with optimized rendering
+const createToolCard = (tool) => {
     const card = document.createElement('a');
     card.href = tool.url;
-    card.target = '_blank';
     card.className = 'tool-card';
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
     
+    // Use template literal for better performance
     card.innerHTML = `
         <h3>${tool.name}</h3>
         <p>${tool.description}</p>
@@ -830,42 +850,100 @@ function createToolCard(tool) {
     `;
     
     return card;
-}
+};
 
-// Filter tools based on search and category
-function filterTools() {
-    const searchTerm = searchInput.value.toLowerCase();
+// Optimized tool filtering with improved search
+const filterTools = debounce(() => {
+    const searchTerm = elements.searchInput.value.toLowerCase().trim();
     const activeCategory = document.querySelector('.category-btn.active').dataset.category;
     
-    const filteredTools = tools.filter(tool => {
-        const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
-                            tool.description.toLowerCase().includes(searchTerm) ||
-                            tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+    // Show loading state
+    showLoading();
+    
+    // Use requestAnimationFrame for smooth rendering
+    requestAnimationFrame(() => {
+        const filteredTools = tools.filter(tool => {
+            const matchesSearch = searchTerm === '' || 
+                tool.name.toLowerCase().includes(searchTerm) ||
+                tool.description.toLowerCase().includes(searchTerm) ||
+                tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            
+            const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
+            
+            return matchesSearch && matchesCategory;
+        });
         
-        const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
-        
-        return matchesSearch && matchesCategory;
+        renderTools(filteredTools);
+    });
+}, 150);
+
+// Optimized tool rendering with document fragment and intersection observer
+const renderTools = (toolsToRender) => {
+    const fragment = document.createDocumentFragment();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    toolsToRender.forEach((tool, index) => {
+        const card = createToolCard(tool);
+        card.style.opacity = '0';
+        card.style.transition = 'opacity 0.3s ease';
+        fragment.appendChild(card);
+        observer.observe(card);
     });
     
-    renderTools(filteredTools);
-}
+    elements.toolsGrid.innerHTML = '';
+    elements.toolsGrid.appendChild(fragment);
+};
 
-// Set up event listeners
-function setupEventListeners() {
-    // Search input
-    if (searchInput) {
-        searchInput.addEventListener('input', filterTools);
-    }
+// Event listeners with optimized handling
+const setupEventListeners = () => {
+    // Search input with improved performance
+    elements.searchInput.addEventListener('input', filterTools, { passive: true });
     
-    // Category buttons
-    categoryButtons.forEach(button => {
+    // Category buttons with improved accessibility
+    elements.categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            elements.categoryButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
             button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
             filterTools();
+        }, { passive: true });
+    });
+
+    // Add keyboard navigation for categories
+    elements.categoryButtons.forEach(button => {
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                button.click();
+            }
         });
     });
-}
+};
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePage); 
+// Initialize page with optimized loading
+const initializePage = () => {
+    showLoading();
+    requestAnimationFrame(() => {
+        renderTools(tools);
+        setupEventListeners();
+    });
+};
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePage);
+} else {
+    initializePage();
+} 
